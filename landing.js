@@ -11,7 +11,7 @@ f.addEventListener('submit',async e=>{e.preventDefault();err.hidden=true;
  if(!f.consenso.checked){err.textContent='Per continuare serve il consenso.';err.hidden=false;return}
  if(d.get('sito')){show();return}
  const b=$('#go');b.disabled=true;b.textContent='Un attimo…';
- try{if(SCRIPT_URL){const body=new URLSearchParams({nome:d.get('nome')||'',email,consenso:'sì',fonte:'landing-bonus'});await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body})}}catch(x){}
+ try{if(SCRIPT_URL){const body=new URLSearchParams({nome:d.get('nome')||'',email,consenso:'sì',fonte:'landing-bonus'});fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body,keepalive:true}).catch(()=>{})}}catch(x){}
  try{localStorage.setItem('bonusSbloccato','1')}catch(x){}
  show();$('#ok').scrollIntoView({behavior:'smooth',block:'center'})});
 // libro 3D e neve
