@@ -28,6 +28,8 @@ function grid(){const g=$('#grid'),s=S();g.innerHTML='';D.filter(x=>filter==='al
  c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.classList.toggle('flip');c.classList.contains('flip')?fl2.add(x.d):fl2.delete(x.d)}};
  tilt(c);g.appendChild(c)})}
 function tilt(el){el.addEventListener('pointermove',e=>{if(el.classList.contains('flip')||e.pointerType==='touch')return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--ry',(x*18)+'deg');el.style.setProperty('--rx',(-y*18)+'deg')});el.addEventListener('pointerleave',()=>{el.style.setProperty('--ry','0deg');el.style.setProperty('--rx','0deg')})}
+function shelf(newIds=[]){const sh=$('#shelf');sh.innerHTML='';BADGES.forEach(b=>{const u=st.badges.includes(b.id),e=document.createElement('div');e.className='badge'+(u?'':' lock')+(newIds.includes(b.id)?' new':'');
+ e.innerHTML=`<div class="medal"><span>${u?b.i:'🔒'}</span></div><b>${b.n}</b><small>${b.d}</small>`;tilt3(e);sh.appendChild(e)})}
 function tilt3(el){el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transform=`rotateY(${x*50}deg) rotateX(${-y*40}deg)`});el.addEventListener('pointerleave',()=>el.style.transform='')}
 function prog(){const n=st.done.length;$('#barfill').style.width=n/25*100+'%';$('#proglbl').textContent=`${n} di 25 giochi fatti`}
 function toggle(d){const s=S();s.has(d)?s.delete(d):s.add(d);st.done=[...s];const fresh=[];BADGES.forEach(b=>{if(b.f(s)&&!st.badges.includes(b.id)){st.badges.push(b.id);fresh.push(b)}});save();grid();shelf(fresh.map(b=>b.id));prog();lights();upd();
@@ -61,19 +63,29 @@ function confetti(){const c=$('#conf'),x=c.getContext('2d');c.width=innerWidth;c
 const TC=['#ff4d4d','#ffd75e','#4aa3ff','#6dff8a','#ff9ff3'];
 const tr=$('#tree');
 function buildTree(){
- const ns='http://www.w3.org/2000/svg';let h='<defs><linearGradient id="gr" x1="0" x2="1"><stop offset="0" stop-color="#14532d"/><stop offset=".5" stop-color="#1e7a43"/><stop offset="1" stop-color="#0f3d22"/></linearGradient></defs>';
- h+='<rect x="175" y="440" width="50" height="60" rx="6" fill="#6b3f1d"/><rect x="175" y="440" width="18" height="60" fill="#8a5428"/>';
- [[200,70,150,170],[200,140,190,190],[200,230,230,240]].forEach(([cx,y,w,hh])=>{h+=`<path d="M${cx},${y} L${cx+w/2},${y+hh} Q${cx},${y+hh+18} ${cx-w/2},${y+hh} Z" fill="url(#gr)" stroke="#0b2d19" stroke-width="2"/>`});
- // ghirlanda
- h+='<path d="M95 175 Q200 215 305 175" fill="none" stroke="#c99a2e" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/><path d="M70 290 Q200 340 330 290" fill="none" stroke="#c99a2e" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/><path d="M45 410 Q200 470 355 410" fill="none" stroke="#c99a2e" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>';
+ let h='<defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#0d4a27"/><stop offset=".45" stop-color="#1f8a4c"/><stop offset="1" stop-color="#0b3a1f"/></linearGradient><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#0f5530"/><stop offset=".5" stop-color="#27a05a"/><stop offset="1" stop-color="#0c4224"/></linearGradient><radialGradient id="halo"><stop offset="0" stop-color="#ffd75e" stop-opacity=".35"/><stop offset="1" stop-color="#ffd75e" stop-opacity="0"/></radialGradient><linearGradient id="tk" x1="0" x2="1"><stop offset="0" stop-color="#5a3216"/><stop offset=".5" stop-color="#8a5428"/><stop offset="1" stop-color="#4a280f"/></linearGradient></defs>';
+ h+='<ellipse cx="200" cy="480" rx="170" ry="16" fill="#0006"/>';
+ h+='<rect x="178" y="372" width="44" height="64" rx="5" fill="url(#tk)"/>';
+ const T=[[50,150,62],[105,215,90],[165,290,120],[235,375,155]];
+ const tier=([y0,y1,w],k)=>{const n=Math.round(w/16),st=2*w/n;let d=`M200,${y0} L${200+w},${y1-14}`;for(let i=0;i<n;i++){const x1=200+w-st*(i+1),xm=200+w-st*(i+.5);d+=` Q${xm},${y1+14} ${x1},${y1-14}`}d+=' Z';
+  return `<path d="${d}" fill="url(#g${k%2+1})" stroke="#072a15" stroke-width="2.5" stroke-linejoin="round"/>`};
+ for(let k=3;k>=0;k--) h+=tier(T[k],k);
+ // neve sulle punte
+ T.forEach(([y0,y1,w],k)=>{});
+ // ghirlande dorate
+ [[150,60],[214,86],[288,116],[372,150]].forEach(([y,w])=>{h+=`<path d="M${200-w+6},${y-w*.18} Q200,${y+w*.28} ${200+w-6},${y-w*.18}" fill="none" stroke="#e8b93c" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 7"/>`});
  // palline fisse
- [[150,160,'#b3261e'],[250,150,'#c99a2e'],[110,265,'#c99a2e'],[290,270,'#b3261e'],[200,300,'#4aa3ff'],[80,385,'#b3261e'],[320,390,'#c99a2e'],[200,420,'#b3261e'],[145,350,'#c99a2e'],[260,345,'#4aa3ff']].forEach(([x,y,f])=>{h+=`<circle cx="${x}" cy="${y}" r="9" fill="${f}" stroke="#0004"/><circle cx="${x-3}" cy="${y-3}" r="2.5" fill="#fff9"/>`});
- // stella
- h+='<polygon class="star" id="tstar" fill="#5a5a40" points="200,16 208,44 238,44 214,60 222,88 200,72 178,88 186,60 162,44 192,44"/>';
- // 25 lucine disposte a righe
- const pos=[];const hw=y=>Math.max(0,...[[70,170,75],[140,190,95],[230,240,115]].map(([t,hh,w])=>y>=t&&y<=t+hh?(y-t)/hh*w:0));
- [[140,3],[192,4],[250,5],[320,6],[400,7]].forEach(([y,n])=>{const w=hw(y)*.78;for(let i=0;i<n;i++)pos.push([200+(i/(n-1)-.5)*2*w,y+(i%2?9:0)])});
- pos.forEach(([x,y],i)=>{h+=`<circle class="bulb" data-d="${i+1}" cx="${x}" cy="${y}" r="8" style="color:${TC[i%5]}"><title>${i+1} dicembre</title></circle>`});
+ [[162,140,'#d33a2f'],[238,136,'#e8b93c'],[150,206,'#e8b93c'],[252,210,'#d33a2f'],[200,230,'#3b8de0'],[128,282,'#d33a2f'],[272,282,'#e8b93c'],[168,310,'#3b8de0'],[232,312,'#d33a2f'],[110,352,'#e8b93c'],[290,352,'#3b8de0'],[200,356,'#d33a2f']].forEach(([x,y,f])=>{h+=`<line x1="${x}" y1="${y-14}" x2="${x}" y2="${y-8}" stroke="#e8b93c" stroke-width="1.5"/><circle cx="${x}" cy="${y}" r="9" fill="${f}" stroke="#0005"/><circle cx="${x-3}" cy="${y-3}" r="2.6" fill="#fff9"/>`});
+ // regali
+ h+='<g><rect x="70" y="440" width="64" height="40" rx="3" fill="#b3261e"/><rect x="98" y="440" width="8" height="40" fill="#ffd75e"/><rect x="70" y="456" width="64" height="8" fill="#ffd75e"/><path d="M102,440 q-14,-18 -22,-6 q8,10 22,6 q14,4 22,-6 q-8,-12 -22,6z" fill="#ffd75e"/>'+
+  '<rect x="262" y="448" width="56" height="32" rx="3" fill="#1f5fa8"/><rect x="286" y="448" width="8" height="32" fill="#fff8e6"/><rect x="262" y="460" width="56" height="7" fill="#fff8e6"/>'+
+  '<rect x="214" y="458" width="40" height="22" rx="3" fill="#1e7a43"/><rect x="230" y="458" width="8" height="22" fill="#ffd75e"/></g>';
+ // stella e alone
+ h+='<circle cx="200" cy="38" r="46" fill="url(#halo)"/><polygon class="star" id="tstar" fill="#5a5a40" stroke="#2a2a1a" stroke-width="1.5" stroke-linejoin="round" points="200,8 209,32 235,33 215,49 222,74 200,60 178,74 185,49 165,33 191,32"/>';
+ // 25 lucine
+ const hw=y=>Math.max(0,...T.map(([a,b,w])=>y>=a&&y<=b?(y-a)/(b-a)*w:0));
+ const pos=[];[[100,2],[148,3],[196,4],[246,5],[292,5],[342,6]].forEach(([y,n])=>{const w=hw(y)*.78;for(let i=0;i<n;i++)pos.push([200+(n===1?0:(i/(n-1)-.5)*2*w),y+(i%2?10:0)])});
+ pos.forEach(([x,y],i)=>{h+=`<circle class="bulb" data-d="${i+1}" cx="${x.toFixed(1)}" cy="${y}" r="8" style="color:${TC[i%5]}"><title>${i+1} dicembre</title></circle>`});
  tr.innerHTML=h;
  tr.querySelectorAll('.bulb').forEach(b=>b.onclick=()=>{const d=+b.dataset.d,x=D.find(z=>z.d===d);$('#treecap').textContent=`${d} dicembre · ${x.t}`+(S().has(d)?' ✓':'')});
  tr.parentElement.addEventListener('pointermove',e=>{const r=tr.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5;tr.style.transform=`rotateY(${x*25}deg)`});
