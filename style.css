@@ -24,8 +24,8 @@ h2{font-size:2rem;margin:48px 0 6px;color:#fff}.hint{margin:0 0 18px;color:#cfd8
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
 .chip{font:inherit;font-size:.9rem;cursor:pointer;border:2px solid #ffffff44;background:#0003;color:#fff;border-radius:999px;padding:6px 14px}.chip.on{background:var(--gold);color:#2a1d00;border-color:var(--gold)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:22px;perspective:1400px}
-.card{position:relative;aspect-ratio:3/4;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.8,.2,1);cursor:pointer;outline:none}
-.card.flip{transform:rotateY(180deg)}
+.card{position:relative;aspect-ratio:3/4;transform-style:preserve-3d;transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .6s cubic-bezier(.2,.8,.2,1);cursor:pointer;outline:none}
+.card.flip{transform:rotateY(180deg)!important}
 .face{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:0 14px 28px #0007,inset 0 0 0 3px var(--gold)}
 .front{background:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
 .front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
