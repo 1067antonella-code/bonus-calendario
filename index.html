@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sblocca il bonus — Diario dell'attesa</title>
+<meta name="description" content="Sblocca il bonus gratuito del Calendario dell'Avvento di Storie e Filastrocche: 25 giochi da stampare e un diario interattivo con albero di luci e badge.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="landing.css"></head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+<header class="hero">
+  <div class="book3d" id="book"><div class="cover"><img src="img/p-01.jpg" alt="Copertina del Diario dell'attesa"></div><div class="pages"></div></div>
+  <div class="heroTxt">
+    <p class="kicker">Bonus gratuito per chi ha il libro</p>
+    <h1>Sblocca il Diario dell'attesa</h1>
+    <p class="sub">«Il Calendario dell'Avvento di Storie e Filastrocche»</p>
+    <ul class="gift">
+      <li>🎨 <b>25 schede da stampare</b>: colorare, labirinti, unisci i puntini, cerca le parole</li>
+      <li>🎄 <b>Diario interattivo</b> con l'albero che accende una luce ogni sera</li>
+      <li>🏅 <b>10 badge</b> da collezionare, uno per ogni piccola impresa</li>
+    </ul>
+    <form id="f" class="lead" novalidate>
+      <label>Il tuo nome <small>(facoltativo)</small><input name="nome" autocomplete="given-name" placeholder="Come ti chiami?"></label>
+      <label>La tua email<input name="email" type="email" required autocomplete="email" placeholder="nome@esempio.it"></label>
+      <input name="sito" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+      <label class="chk"><input type="checkbox" name="consenso" required> Acconsento a ricevere il bonus e, se vorrai, novità sui prossimi libri di Lella Racconta. Mi posso cancellare quando voglio. <a href="#privacy" id="plink">Informativa</a></label>
+      <button class="btn" id="go" type="submit">Sblocca il bonus</button>
+      <p class="err" id="err" role="alert" hidden></p>
+    </form>
+    <div class="unlocked" id="ok" hidden>
+      <h2>Bonus sbloccato! 🎁</h2>
+      <p>Grazie! Scegli come usarlo:</p>
+      <div class="cta">
+        <a class="btn" href="diario.html">Apri il diario interattivo</a>
+        <a class="btn ghost" href="pdf/Diario_dellattesa_completo.pdf" download>Scarica il PDF da stampare</a>
+        <a class="btn ghost" href="https://drive.google.com/drive/folders/1VIGQA7DhBnL-A1SXbntTQbcJgNNJUQQG?usp=sharing" target="_blank" rel="noopener">Apri la cartella Google Drive</a>
+      </div>
+    </div>
+  </div>
+</header>
+<main><section id="privacy"><h2>Informativa privacy</h2>
+<p class="hint">Titolare del trattamento: Lella Racconta. I dati (nome ed email) sono usati solo per inviarti il bonus e, con il tuo consenso, comunicazioni sui libri. Non vengono ceduti a terzi. Sono conservati in un foglio Google protetto. Puoi chiedere in ogni momento accesso, modifica o cancellazione rispondendo a qualunque email ricevuta. <i>[Inserisci qui il tuo indirizzo email di contatto]</i></p></section></main>
+<footer>Venticinque sere, un'attesa insieme · Lella Racconta<br><small>Testi e illustrazioni creati con l'aiuto dell'intelligenza artificiale.</small></footer>
+<script src="landing.js"></script>
+</body></html>

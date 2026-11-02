@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diario dell'attesa — il bonus</title>
+<meta name="description" content="Il bonus de Il Calendario dell'Avvento di Storie e Filastrocche: 25 giochi da colorare, stampare e collezionare.">
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+<header class="hero">
+  <div class="book3d" id="book"><div class="cover"><img src="img/p-01.jpg" alt="Copertina del Diario dell'attesa"></div><div class="pages"></div></div>
+  <div class="heroTxt">
+    <p class="kicker">Il bonus del libro</p>
+    <h1>Diario dell'attesa</h1>
+    <p class="sub">«Il Calendario dell'Avvento di Storie e Filastrocche»</p>
+    <p>Venticinque sere, venticinque giochi: colora, trova la strada, unisci i puntini. Gira le carte, stampa la scheda del giorno e colleziona i badge.</p>
+    <div class="cta"><a class="btn" href="#calendario">Apri il calendario</a><a class="btn ghost" href="pdf/Diario_dellattesa_completo.pdf" download>Scarica tutto (PDF)</a><button class="btn ghost" data-print="pdf/Diario_dellattesa_completo.pdf">Stampa tutto</button></div>
+    <div class="prog"><div class="bar"><i id="barfill"></i></div><span id="proglbl">0 di 25 giochi fatti</span></div>
+  </div>
+</header>
+<main>
+<section id="albero"><h2>L'albero delle luci</h2><p class="hint">Ogni gioco fatto accende una luce. Tocca una lucina per vedere il giorno.</p>
+<div class="treewrap" id="treewrap"><svg id="tree" viewBox="0 0 400 520" role="img" aria-label="Albero di Natale con 25 luci"></svg><div class="treecap" id="treecap"></div></div></section>
+<section id="calendario"><h2>Il calendario</h2><p class="hint">Tocca una carta per girarla. Dopo aver giocato, premi «Fatto!» per guadagnare i badge.</p>
+<div class="filters" id="filters"></div><div class="grid" id="grid"></div></section>
+<section id="badge"><h2>I tuoi badge</h2><p class="hint">Passa il dito o il mouse sulle medaglie: si muovono in 3D.</p><div class="shelf" id="shelf"></div></section>
+<section><h2>Per gli adulti</h2><div class="adults">
+<button class="btn" data-print="pdf/soluzioni.pdf">Stampa le soluzioni</button><a class="btn ghost" href="pdf/soluzioni.pdf" download>Scarica le soluzioni</a>
+<button class="btn ghost" id="reset">Azzera i progressi</button></div></section>
+</main>
+<footer>Venticinque sere, un'attesa insieme · Lella Racconta<br><small>Testi e illustrazioni creati con l'aiuto dell'intelligenza artificiale.</small></footer>
+<div class="modal" id="modal" hidden><div class="mcard"><button class="x" id="mx" aria-label="Chiudi">×</button><img id="mimg" alt=""><div class="mb"><h3 id="mt"></h3><div class="cta"><button class="btn" id="mprint">Stampa</button><a class="btn ghost" id="mdl" download>Scarica PDF</a><button class="btn gold" id="mdone"></button></div></div></div></div>
+<div class="toast" id="toast" hidden></div>
+<canvas id="conf" aria-hidden="true"></canvas>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>
