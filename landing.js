@@ -1,6 +1,6 @@
 (()=>{
 // Incolla qui l'URL dell'app web di Google Apps Script (vedi apps-script.gs / README)
-const SCRIPT_URL='https://https://script.google.com/macros/s/AKfycbxOqpitO0sHRKuUu5fd3OIBeJJIW6MKN7FdbA7HPsV20OyMuazfvbrh7iYsBB8ztKEc/exec
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxOqpitO0sHRKuUu5fd3OIBeJJIW6MKN7FdbA7HPsV20OyMuazfvbrh7iYsBB8ztKEc/exec';
 const $=q=>document.querySelector(q);
 const f=$('#f'),ok=$('#ok'),err=$('#err');
 function show(){f.hidden=true;ok.hidden=false}
